@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Weather</title>
+	<meta charset="UTF-8">
+	<title>Local Weather</title>
 	<link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
-	<h1>Hellow world!</h1>
-	<div class="output"></div>
+	<h1>Your local weather</h1>
+	<div id="error"></div>
+
+	<div id="location"></div>
+	<div id="icon"></div>
+	<div id="description"></div>
+	<div id="temperature"></div>
+	<button id="btn">To <span id="units">Fahrenheit</span></button>
+	<div id="humidity"></div>
+	<div id="wind"></div>
 
 	<script src="jquery.js"></script>
 	<script src="script.js"></script>
