@@ -4,10 +4,7 @@ $(function() {
 	var $icon = $('#icon');
 	var $description = $('#description');
 	var $temperature = $('#temperature');
-	var $humidity = $('#humidity');
-	var $wind = $('#wind');
-	var $units = $('#units');
-	var $btn = $('#btn');
+	var $details = $('#details');
 	var degrees = 'C';
 
 	var lat;
@@ -19,7 +16,7 @@ $(function() {
 	  navigator.geolocation.getCurrentPosition(function(position) {
 	  	lat = position.coords.latitude;
 	  	lon = position.coords.longitude;
-
+	  	
 		// we grab data
 		$.ajax( {
 			url: 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&units=metric&appid={id_goes_here}',
@@ -30,33 +27,32 @@ $(function() {
 			// this may be better replaced with 'else', as we're in 'if' now
 			error: function() {
 				// change to search by city name
-				$error.html('<h2>Error while loading data</h2>')
+				$error.html('<h2>Error while loading data</h2>');
 			}
 		});
 	  });
+	} else {
+		$error.html('<h2>We could not read your location</h2>');
 	}
 
 	// renders HTML
 	function rendHTML(data) {
-		$location.html('<h1>' + data.name + '</h1>');
-		$description.html('<h3>'+ data.weather[0].description + '</h3>');
+		$location.html('<h1 class="cover-heading">' + data.name + '</h1>');
+		$description.html('<h3 class="lead">'+ data.weather[0].main + '</h3>');
 		$icon.html('<img src="http://openweathermap.org/img/w/' + data.weather[0].icon + '.png">');
 		celsius = data.main.temp;
-		$temperature.html('<p>Temperature: ' + data.main.temp + '°C</p>');
-		$humidity.html('<p>Humidity: ' + data.main.humidity + '</p');
-		$wind.html('<p>Wind speed: ' + data.wind.speed + ' meters per second</p>');
+		$temperature.html('<p class="lead">' + data.main.temp + '°C</p>');
+		$details.html('<p class="lead">humidity: ' + data.main.humidity + '%, wind: ' + data.wind.speed + ' m/sec</p>');
 	};
 
 	// change units to imperial and back
-	$btn.on('click', function() {
+	$temperature.on('click', function() {
 		if (degrees == 'C') {
 			var fahrenheit = Math.floor(celsius * 9/5 + 32);
-			$temperature.html('<p>Temperature: ' + fahrenheit + '°F</p>');
-			$units.html('Celsius');
+			$temperature.html('<p class="lead">' + fahrenheit + '°F</p>');
 			degrees = 'F';
 		} else {
-			$temperature.html('<p>Temperature: ' + celsius + '°C</p>');
-			$units.html('Fahrenheit');
+			$temperature.html('<p class="lead">' + celsius + '°C</p>');
 			degrees = 'C';
 		};
 	});
