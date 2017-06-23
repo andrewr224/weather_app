@@ -19,7 +19,7 @@ $(function() {
 	  	
 		// we grab data
 		$.ajax( {
-			url: 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&units=metric&appid={id_goes_here}',
+			url: 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&units=metric&appid=22f723723e7730e6e495fcdb912bf28f',
 			success: function(data) {
 				rendHTML(data);
 			},
