@@ -1,3 +1,4 @@
+
 $(function() {
 	var $error = $('#error');
 	var $location = $('#location');
@@ -10,12 +11,15 @@ $(function() {
 	var lat;
 	var lon;
 	var celsius;
+	var city;
 
 	// we get location
 	if (navigator.geolocation) {
 	  navigator.geolocation.getCurrentPosition(function(position) {
 	  	lat = position.coords.latitude;
 	  	lon = position.coords.longitude;
+
+	  	// find location
 	  	
 		// we grab data
 		$.ajax( {
@@ -26,7 +30,6 @@ $(function() {
 
 			// this may be better replaced with 'else', as we're in 'if' now
 			error: function() {
-				// change to search by city name
 				$error.html('<h2>Error while loading data</h2>');
 			}
 		});
@@ -57,3 +60,27 @@ $(function() {
 		};
 	});
 });
+
+
+// This will get your city:
+// http://ipinfo.io/json?callback=JSON_CALLBACK
+
+
+// http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=22f723723e7730e6e495fcdb912bf28f
+
+/* 
+$(function() {
+  var $weather = $('.weather');
+  var wData;
+
+  $.ajax( {
+    url: 'https://ipinfo.io/json?callback=JSON_CALLBACK',
+    success: function(data) {
+      $weather.html(data);
+            }
+  })
+  
+  
+ 
+});
+*/
